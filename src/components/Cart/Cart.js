@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ProductImage } from '../ProductImage/ProductImage';
@@ -6,8 +6,8 @@ import { Price } from '../Price/Price';
 
 import './Cart.scss';
 
-export const Cart = ({ cartItems, products }) => {
-    const cartProducts = cartItems?.filter(id => id)?.map(id => products?.find(p => p.id === id));
+export const Cart = memo(({ cartItems, products }) => {
+    const cartProducts = useMemo(() => cartItems?.filter(id => id)?.map(id => products?.find(p => p.id === id)), [cartItems]);
     return (
         <>
             <Link to="/">Home</Link>
@@ -42,4 +42,4 @@ export const Cart = ({ cartItems, products }) => {
             )}
         </>
     )
-};
+});

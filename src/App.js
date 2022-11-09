@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Profiler } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import { Cart } from './components/Cart/Cart';
@@ -8,17 +8,16 @@ import { ProductPreview } from './components/ProductPreview/ProductPreview';
 
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ProductContext } from './context/ProductContext';
+import { CartContext } from './context/CartContext';
 import { getProducts } from './api';
 
 import './App.css';
-import { CartContext } from './context/CartContext';
 
 function App() {
   const [data, setData] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState({ error: false, status: "" });
-
   const addToCart = (id) => {
     if (cartItems?.indexOf(id) === -1) {
       setCartItems([...cartItems, id]);
@@ -40,6 +39,18 @@ function App() {
     fetchProductData();
   }, []);
 
+  const callback = (id, phase, actualDuration, startTime,
+    baseDuration, commitTime, interactions) => {
+    console.log(
+      "id " + id +
+      " startTime " + startTime +
+      " actualDuration " + actualDuration +
+      " baseDuration " + baseDuration +
+      " commitTime " + commitTime +
+      " phase " + phase +
+      " interactions " + interactions
+    );
+  }
   return (
     <ErrorBoundary>
       <div className="App">
@@ -47,19 +58,27 @@ function App() {
           <Routes>
             <Route exact path="/" element={
               <>
-                <Header text={data?.headerText} />
+                <Profiler id="Header" onRender={callback}>
+                  <Header text={data?.headerText} />
+                </Profiler>
                 <ProductContext.Provider value={setSelectedProduct}>
-                  <ProductGrid products={data?.products} />
+                  <Profiler id="ProductGrid" onRender={callback}>
+                    <ProductGrid products={data?.products} />
+                  </Profiler>
                 </ProductContext.Provider>
               </>
             } />
             <Route path="/product/:productId" element={
               <CartContext.Provider value={addToCart}>
-                <ProductPreview key={selectedProduct?.id} product={selectedProduct} />
+                <Profiler id="ProductPreview" onRender={callback}>
+                  <ProductPreview key={selectedProduct?.id} product={selectedProduct} />
+                </Profiler>
               </CartContext.Provider>
             } />
             <Route path="/cart" element={
-              <Cart cartItems={cartItems} products={data?.products} />
+              <Profiler id="Cart" onRender={callback}>
+                <Cart cartItems={cartItems} products={data?.products} />
+              </Profiler>
             } />
             <Route path="*" element={
               <Navigate to="/" />

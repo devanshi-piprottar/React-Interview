@@ -1,5 +1,6 @@
 const data = {
   headerText: 'Welcome to your interview with The Home Depot!',
+  logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/TheHomeDepot.svg/1020px-TheHomeDepot.svg.png',
   // idea: different image aspect ratios style
   products: [
     {
