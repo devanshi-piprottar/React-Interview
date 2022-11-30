@@ -1,0 +1,31 @@
+//cart quantity in cart and product preview page
+
+//delete in cart
+
+//redux
+
+error boundary individual component
+
+overlay on product image and links on title, desc price
+
+unit test cases
+
+editing ui 
+
+
+web accessibility
+local storage / session
+web worker/ service worker
+browser caching
+meta type/ title/ implement meta type and use html
+semantic html
+atomatic design pattern
+css responsive design
+mobile first and desktop first 
+telvin css vs bootstrap css
+flex / grid/ block layout
+different position static/fixed/relative/absolute
+sass variable / mixins @include / @mixin/ global variable
+java script single ton approach/ observer pattern/ 
+event loop js/ sync async/ solid and dry principle
+grunt / gulp / webpack

@@ -2,8 +2,8 @@
   padding: 10px;
   border: 1px solid #333;
   max-width: 500px;
-  display: flex;
-  margin: 10px 0px;
+  display: flex; 
+  margin: 20px auto;
 
   &-details {
     width: 300px;
@@ -34,4 +34,11 @@
   .product-image-wrapper {
     width: 150px;
   }
+}
+
+.quantity { 
+  padding: 6px;
+  margin-right: 5px;
+  border-radius: 4px;
+  width: 50px;
 }

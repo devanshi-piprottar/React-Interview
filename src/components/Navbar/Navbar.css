@@ -1,0 +1,38 @@
+
+.Nav-logo {
+    height: 45px;
+    width: auto;
+    cursor: pointer;
+}
+
+.Nav-header {
+    background-color: #353935;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.Nav-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.Cart-link {
+    margin-left: auto;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.Cart-link>.text {
+    background-color: white;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: #333;
+}

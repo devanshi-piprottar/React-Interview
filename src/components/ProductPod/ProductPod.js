@@ -12,24 +12,14 @@ export const ProductPod = ({ product }) => {
   const navigate = useNavigate();
 
   if (!product) return null;
-  
+
   const selectProduct = () => {
     setSelectedProduct(product);
-    navigate("product/" + product?.id);
+    navigate("/product/" + product?.id);
   }
 
   return (
-    <article className="product-pod"
-      role="button"
-      tabIndex={0}
-      onKeyPress={(e) => {
-        if (e.key === "Enter") {
-          selectProduct();
-          e.target.blur();
-        }
-      }}
-      onClick={() => selectProduct(product)}
-    >
+    <article className="product-pod">
       {/* TODO: make DRY with a ProductImage component */}
       {product.image &&
         <article className="product-image-wrapper">
@@ -39,14 +29,32 @@ export const ProductPod = ({ product }) => {
         </article>
       }
       {product.brand &&
-        <p>
+        <p
+          role="button"
+          tabIndex={0}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              selectProduct();
+              e.target.blur();
+            }
+          }}
+          onClick={() => selectProduct(product)}>
           <b>
             {product.brand}
           </b>
         </p>
       }
       {product.description &&
-        <p>
+        <p
+          role="button"
+          tabIndex={0}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              selectProduct();
+              e.target.blur();
+            }
+          }}
+          onClick={() => selectProduct(product)}>
           {product.description}
         </p>
       }

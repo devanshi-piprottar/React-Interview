@@ -2,7 +2,7 @@ import React from 'react';
 import { ProductPod } from '../ProductPod/ProductPod';
 import './ProductGrid.scss';
 
-export const ProductGrid = ({ products }) => {
+const ProductGrid = ({ products }) => {
   if (!products?.length) return null;
   
   return (
@@ -16,3 +16,5 @@ export const ProductGrid = ({ products }) => {
     </article>
   );
 };
+
+export default ProductGrid;

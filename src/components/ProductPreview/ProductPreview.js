@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import { ProductImage } from '../ProductImage/ProductImage';
 import { Price } from '../Price/Price';
 
-import { CartContext } from '../../context/CartContext';
+import { addToCart } from '../../redux/cart/CartDispatcher';
+
 import './ProductPreview.scss';
 
-export const ProductPreview = ({ product }) => {
-  const addToCart = useContext(CartContext);
+const ProductPreview = (props) => {
+  const [quantity, setQuantity] = useState(1);
+  const { product } = props;
   return (
     <>
-      <Link to="/">Home</Link>
-      <Link to="/cart">Cart</Link>
       {product &&
         <article className="product-preview">
           {/* TODO: make DRY with a ProductImage component */}
@@ -39,21 +39,34 @@ export const ProductPreview = ({ product }) => {
             <article className="product-price-wrapper">
               <Price product={product} showSpecialPrice />
             </article>
-            <button
-              tabIndex={0}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  addToCart(product.id);
-                  e.target.blur();
-                }
-              }}
-              onClick={() => addToCart(product.id)}
-            >
-              Add to Cart
-            </button>
+            <article>
+              <input type="number" className="quantity" min="1" step="1"
+                value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+              <button
+                tabIndex={0}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    addToCart(product.id);
+                    e.target.blur();
+                  }
+                }}
+                onClick={() => props.addToCart({ id: product.id, quantity: quantity })}
+              >
+                Add to Cart
+              </button>
+            </article>
           </aside>
         </article>
       }
     </>
   )
 };
+
+const mapDispatchToProps = dispatch => ({
+  addToCart: (id, quantity) => dispatch(addToCart(id, quantity)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ProductPreview);

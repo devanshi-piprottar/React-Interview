@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './Header.css';
 
-export const Header = ({ text }) => {
+export const Header = ({ text, logo }) => {
   return (
     <>
-      <h1>
+      <h1 className='title'>
         {text}
       </h1>
-      <Link to="/cart">Cart</Link>
     </>
   );
 };
